@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Login from './Login';
-import SpinWheel from './SpinWheel';
-import TwitterConnect from './TwitterConnect';
-import ReferralSystem from './ReferralSystem';
-import '../styles/main.css';
+import React, { useState, useEffect } from "react";
+import Login from "./Login";
+import SpinWheel from "./SpinWheel";
+import TwitterConnect from "./TwitterConnect";
+import ReferralSystem from "./ReferralSystem";
+import "../styles/main.css";
 
 const App = () => {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -18,24 +18,24 @@ const App = () => {
   const handleTwitterConnection = (connected) => {
     setTwitterConnected(connected);
     if (connected) {
-      setSpinsRemaining(prev => prev + 1);
+      setSpinsRemaining((prev) => prev + 1);
     }
   };
 
   const handleSpin = (reward) => {
     if (spinsRemaining > 0) {
-      setSpinsRemaining(prev => prev - 1);
-      setPoints(prev => prev + (typeof reward === 'number' ? reward : 100));
+      setSpinsRemaining((prev) => prev - 1);
+      setPoints((prev) => prev + (typeof reward === "number" ? reward : 100));
     }
   };
 
   const handleReferral = () => {
-    setSpinsRemaining(prev => prev + 1);
+    setSpinsRemaining((prev) => prev + 1);
   };
 
   return (
     <div className="app">
-      <h1>Spin to Earn  with </h1>
+      <h1>Spin to Earn with </h1>
       {!walletConnected ? (
         <Login onConnect={handleWalletConnection} />
       ) : (
@@ -44,7 +44,9 @@ const App = () => {
           <SpinWheel onSpin={handleSpin} spinsRemaining={spinsRemaining} />
           <div>Points: {points}</div>
           <div>Spins Remaining: {spinsRemaining}</div>
-          {!twitterConnected && <TwitterConnect onConnect={handleTwitterConnection} />}
+          {!twitterConnected && (
+            <TwitterConnect onConnect={handleTwitterConnection} />
+          )}
           <ReferralSystem onReferral={handleReferral} />
         </>
       )}
